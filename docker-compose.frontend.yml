@@ -1,29 +1,6 @@
 version: "3.8"
 
 services:
-  adservice:
-    image: thuanlp/online_boutique_adservice:latest
-    container_name: adservice
-    ports:
-      - "9555:9555"
-    environment:
-      - PORT=9555
-    resources:
-      limits:
-        memory: 300Mi
-        cpu: 300m
-      requests:
-        memory: 180Mi
-        cpu: 200m
-    healthcheck:
-      test: ["CMD", "/bin/grpc_health_probe", "-addr=:9555"]
-      interval: 15s
-      retries: 3
-      start_period: 20s
-      timeout: 5s
-    networks:
-      - online_boutique_network
-
   frontend:
     image: thuanlp/online_boutique_frontend:latest
     ports:
