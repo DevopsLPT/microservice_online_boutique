@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  adservice:
+    image: thuanlp/online_boutique_adservice:latest
+    container_name: adservice
+    ports:
+      - "9555:9555"
+    environment:
+      - PORT=9555
+    resources:
+      limits:
+        memory: 300Mi
+        cpu: 300m
+      requests:
+        memory: 180Mi
+        cpu: 200m
+    healthcheck:
+      test: ["CMD", "/bin/grpc_health_probe", "-addr=:9555"]
+      interval: 15s
+      retries: 3
+      start_period: 20s
+      timeout: 5s
+    networks:
+      - online_boutique_network
+
+  frontend:
+    image: thuanlp/online_boutique_frontend:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8080
+      - AD_SERVICE_ADDR=adservice:9555
+      # - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+      # - CURRENCY_SERVICE_ADDR=currencyservice:7000
+      # - CART_SERVICE_ADDR=cartservice:7070
+      # - RECOMMENDATION_SERVICE_ADDR=recommendationservice:8080
+      # - SHIPPING_SERVICE_ADDR=shippingservice:50051
+      # - CHECKOUT_SERVICE_ADDR=checkoutservice:5050
+      - ENABLE_PROFILER=0
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://192.168.224.140:8000/_healthz"]
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 5s
+    networks:
+      - online_boutique_network-network
+
+networks:
+  online_boutique_network:
+    driver: bridge
