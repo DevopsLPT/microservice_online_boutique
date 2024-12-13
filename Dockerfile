@@ -26,7 +26,7 @@ COPY --from=builder /usr/local/lib/python3.10/ /usr/local/lib/python3.10/
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 5000
 ENTRYPOINT [ "python", "email_server.py" ]
 
 FROM without-grpc-health-probe-bin
