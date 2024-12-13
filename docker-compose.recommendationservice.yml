@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  recommendationservice:
+    image: thuanlp/online_boutique_recommendationservice:latest
+    container_name: recommendationservice
+    environment:
+      - PORT=8080
+      - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+      - DISABLE_PROFILER=1
+    ports:
+      - "8080:8080"
+    resources:
+      limits:
+        memory: 450Mi
+        cpus: "0.2"
+      requests:
+        memory: 220Mi
+        cpus: "0.1"
+    healthcheck:
+      test: ["CMD", "/bin/grpc_health_probe", "-addr=:8080"]
+      interval: 10s
+      retries: 3
+      start_period: 20s
+      timeout: 5s
+    networks:
+      - online_boutique_network
+
+networks:
+  online_boutique_network:
+    driver: bridge

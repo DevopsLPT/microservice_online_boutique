@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  emailservice:
+    image: thuanlp/online_boutique_emailservice:latest
+    container_name: emailservice
+    ports:
+      - "5000:8080"
+    environment:
+      - PORT=8080
+      - DISABLE_PROFILER=1
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "/bin/grpc_health_probe", "-addr=:8080"]
+      interval: 5s
+      retries: 3
+      start_period: 20s
+      timeout: 5s
+    resources:
+      limits:
+        memory: 128Mi
+        cpus: "0.2"
+      requests:
+        memory: 64Mi
+        cpus: "0.1"
+    networks:
+      - online_boutique_network
+
+networks:
+  online_boutique_network:
+    driver: bridge

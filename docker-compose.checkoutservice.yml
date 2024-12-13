@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  checkoutservice:
+    image: adijaiswal/checkoutservice:latest
+    container_name: checkoutservice
+    environment:
+      - PORT=5050
+      - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+      - SHIPPING_SERVICE_ADDR=shippingservice:50051
+      - PAYMENT_SERVICE_ADDR=paymentservice:50051
+      - EMAIL_SERVICE_ADDR=emailservice:5000
+      - CURRENCY_SERVICE_ADDR=currencyservice:7000
+      - CART_SERVICE_ADDR=cartservice:7070
+    ports:
+      - "5050:5050"
+    healthcheck:
+      test: ["CMD", "/bin/grpc_health_probe", "-addr=:5050"]
+      interval: 10s
+      retries: 3
+      start_period: 20s
+      timeout: 5s
+    resources:
+      limits:
+        memory: 128Mi
+        cpus: "0.2"
+      requests:
+        memory: 64Mi
+        cpus: "0.1"
+    networks:
+      - online_boutique_network
+
+networks:
+  online_boutique_network:
+    driver: bridge

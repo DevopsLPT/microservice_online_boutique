@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  productcatalogservice:
+    image: adijaiswal/productcatalogservice:latest
+    container_name: productcatalogservice
+    ports:
+      - "3550:3550"
+    environment:
+      - PORT=3550
+      - DISABLE_PROFILER=1
+    healthcheck:
+      test: ["CMD", "/bin/grpc_health_probe", "-addr=:3550"]
+      interval: 10s
+      retries: 3
+      start_period: 20s
+      timeout: 5s
+    resources:
+      limits:
+        memory: 128Mi
+        cpus: "0.2"
+      requests:
+        memory: 64Mi
+        cpus: "0.1"
+    networks:
+      - online_boutique_network
+
+networks:
+  online_boutique_network:
+    driver: bridge
