@@ -7,6 +7,7 @@ services:
     ports:
       - "7070:7070"
     environment:
+      - PORT=7070
       - REDIS_ADDR=redis-cart:6379
     resources:
       limits:
@@ -21,14 +22,6 @@ services:
       retries: 3
       start_period: 20s
       timeout: 5s
-    networks:
-      - online_boutique_network
-
-  redis-cart:
-    image: redis:latest
-    container_name: redis-cart
-    ports:
-      - "6379:6379"
     networks:
       - online_boutique_network
 

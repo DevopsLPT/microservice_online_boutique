@@ -2,13 +2,13 @@ version: "3.8"
 
 services:
   checkoutservice:
-    image: adijaiswal/checkoutservice:latest
+    image: thuanlp/online_boutique_checkoutservice:latest
     container_name: checkoutservice
     environment:
       - PORT=5050
       - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
       - SHIPPING_SERVICE_ADDR=shippingservice:50051
-      - PAYMENT_SERVICE_ADDR=paymentservice:50051
+      - PAYMENT_SERVICE_ADDR=paymentservice:50050
       - EMAIL_SERVICE_ADDR=emailservice:5000
       - CURRENCY_SERVICE_ADDR=currencyservice:7000
       - CART_SERVICE_ADDR=cartservice:7070

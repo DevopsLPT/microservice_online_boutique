@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   productcatalogservice:
-    image: adijaiswal/productcatalogservice:latest
+    image: thuanlp/online_boutique_productcatalogservice:latest
     container_name: productcatalogservice
     ports:
       - "3550:3550"

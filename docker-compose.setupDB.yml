@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  redis-cart:
+    image: redis:latest
+    container_name: redis-cart
+    ports:
+      - "6379:6379"
+    networks:
+      - online_boutique_network
+
+networks:
+  online_boutique_network:
+    driver: bridge

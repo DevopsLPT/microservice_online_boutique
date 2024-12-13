@@ -5,10 +5,10 @@ services:
     image: thuanlp/online_boutique_paymentservice:latest
     container_name: paymentservice
     environment:
-      - PORT=50051
+      - PORT=50050
       - DISABLE_PROFILER=1
     ports:
-      - "50051:50051"
+      - "50050:50050"
     resources:
       limits:
         memory: 128Mi
@@ -17,7 +17,7 @@ services:
         memory: 64Mi
         cpus: "0.1"
     healthcheck:
-      test: ["CMD", "/bin/grpc_health_probe", "-addr=:50051"]
+      test: ["CMD", "/bin/grpc_health_probe", "-addr=:50050"]
       interval: 10s
       retries: 3
       start_period: 20s
