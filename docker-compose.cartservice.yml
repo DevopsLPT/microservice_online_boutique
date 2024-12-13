@@ -9,13 +9,6 @@ services:
     environment:
       - PORT=7070
       - REDIS_ADDR=redis-cart:6379
-    resources:
-      limits:
-        memory: 128Mi
-        cpus: "0.3"
-      requests:
-        memory: 64Mi
-        cpus: "0.2"
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
       interval: 15s

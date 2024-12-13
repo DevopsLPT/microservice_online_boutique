@@ -8,13 +8,6 @@ services:
       - "9555:9555"
     environment:
       - PORT=9555
-    resources:
-      limits:
-        memory: 300Mi
-        cpu: 300m
-      requests:
-        memory: 180Mi
-        cpu: 200m
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:9555"]
       interval: 15s

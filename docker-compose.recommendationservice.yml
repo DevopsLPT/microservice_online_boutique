@@ -5,18 +5,11 @@ services:
     image: thuanlp/online_boutique_recommendationservice:latest
     container_name: recommendationservice
     environment:
-      - PORT=8080
+      - PORT=8088
       - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
       - DISABLE_PROFILER=1
     ports:
       - "8088:8088"
-    resources:
-      limits:
-        memory: 450Mi
-        cpus: "0.2"
-      requests:
-        memory: 220Mi
-        cpus: "0.1"
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:8088"]
       interval: 10s

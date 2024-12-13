@@ -9,13 +9,6 @@ services:
       - DISABLE_PROFILER=1
     ports:
       - "50050:50050"
-    resources:
-      limits:
-        memory: 128Mi
-        cpus: "0.2"
-      requests:
-        memory: 64Mi
-        cpus: "0.1"
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:50050"]
       interval: 10s

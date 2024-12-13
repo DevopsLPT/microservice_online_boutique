@@ -24,7 +24,7 @@ services:
       start_period: 10s
       timeout: 5s
     networks:
-      - online_boutique_network-network
+      - online_boutique_network
 
 networks:
   online_boutique_network:

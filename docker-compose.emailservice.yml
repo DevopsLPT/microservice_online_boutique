@@ -17,13 +17,6 @@ services:
       retries: 3
       start_period: 20s
       timeout: 5s
-    resources:
-      limits:
-        memory: 128Mi
-        cpus: "0.2"
-      requests:
-        memory: 64Mi
-        cpus: "0.1"
     networks:
       - online_boutique_network
 
