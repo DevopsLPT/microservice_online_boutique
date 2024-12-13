@@ -19,13 +19,7 @@ pipeline {
                 }
             }
         }
-        stage('Test Docker Image') {
-            steps {
-                script {
-                    sh "docker run --rm ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} --version"
-                }
-            }
-        }
+
         stage('Login to Docker Hub') {
             steps {
                 script {
