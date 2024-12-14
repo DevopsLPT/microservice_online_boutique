@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent build-server
     environment {
         DOCKER_IMAGE_NAME = "thuanlp/online_boutique_frontend"
         DOCKER_IMAGE_TAG = "latest"
