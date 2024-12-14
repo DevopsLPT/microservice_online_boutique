@@ -7,8 +7,10 @@ services:
     environment:
       - PORT=50050
       - DISABLE_PROFILER=1
+    restart: always
     ports:
       - "50050:50050"
+    container_name: paymentservice
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:50050"]
       interval: 10s

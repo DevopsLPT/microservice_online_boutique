@@ -8,8 +8,10 @@ services:
       - PORT=8088
       - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
       - DISABLE_PROFILER=1
+    restart: always
     ports:
       - "8088:8088"
+    container_name: recommendationservice
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:8088"]
       interval: 10s

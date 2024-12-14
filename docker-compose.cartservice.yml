@@ -9,6 +9,8 @@ services:
     environment:
       - PORT=7070
       - REDIS_ADDR=redis-cart:6379
+    container_name: cartservice
+    restart: always
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
       interval: 15s

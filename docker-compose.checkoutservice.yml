@@ -4,6 +4,7 @@ services:
   checkoutservice:
     image: thuanlp/online_boutique_checkoutservice:latest
     container_name: checkoutservice
+    restart: always
     environment:
       - PORT=5050
       - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
@@ -14,6 +15,7 @@ services:
       - CART_SERVICE_ADDR=cartservice:7070
     ports:
       - "5050:5050"
+    container_name: checkoutservice
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:5050"]
       interval: 10s

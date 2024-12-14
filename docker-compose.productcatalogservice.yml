@@ -9,6 +9,8 @@ services:
     environment:
       - PORT=3550
       - DISABLE_PROFILER=1
+    restart: always
+    container_name: productcatalogservice
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:3550"]
       interval: 10s

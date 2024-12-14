@@ -5,6 +5,7 @@ services:
     image: thuanlp/online_boutique_frontend:latest
     ports:
       - "80:80"
+    restart: always
     environment:
       - PORT=80
       - ENABLE_PROFILER=0
@@ -16,7 +17,7 @@ services:
       - RECOMMENDATION_SERVICE_ADDR=recommendationservice:8088
       - SHIPPING_SERVICE_ADDR=shippingservice:50051
       - CHECKOUT_SERVICE_ADDR=checkoutservice:5050
-
+    container_name: frontend
     healthcheck:
       test: ["CMD", "curl", "-f", "http://192.168.224.140:80/_healthz"]
       interval: 30s
