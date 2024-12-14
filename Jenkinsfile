@@ -69,16 +69,18 @@ pipeline {
         }
 
         stage('Trivy_Image_Scan') {
-            script {
-                sh """
-                    docker run --rm -v $PWD:/shoeshop_fe -v \
-                        /var/run/docker.sock:/var/run/docker.sock \
-                        aquasec/trivy image --download-db-only
+            steps {
+                script {
+                    sh """
+                        docker run --rm -v $PWD:/shoeshop_fe -v \
+                            /var/run/docker.sock:/var/run/docker.sock \
+                            aquasec/trivy image --download-db-only
         
-                    docker run --rm -v $PWD:/shoeshop_fe -v /var/run/docker.sock:/var/run/docker.sock \
-                        aquasec/trivy image --format template --template "@contrib/html.tpl" \
-                        --output /shoeshop_fe/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
-                """
+                        docker run --rm -v $PWD:/shoeshop_fe -v /var/run/docker.sock:/var/run/docker.sock \
+                            aquasec/trivy image --format template --template "@contrib/html.tpl" \
+                            --output /shoeshop_fe/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+                    """
+                }
             }
         }
 
