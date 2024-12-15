@@ -15,27 +15,27 @@ pipeline {
             }
         }
 
-        // stage('Sonarqube_Static_Code_Analysis') {
-        //     steps {
-        //         withCredentials([
-        //             string(credentialsId: 'SONAR_HOST', variable: 'SONAR_HOST'),
-        //             string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN'),
-        //             string(credentialsId: 'SONAR_PROJECTKEY', variable: 'SONAR_PROJECTKEY')
-        //         ]) {
-        //             script {
-        //                 sh """
-        //                     docker run --rm \
-        //                         -v ${env.WORKSPACE}:/usr/src \
-        //                         sonarsource/sonar-scanner-cli:latest \
-        //                         sonar-scanner \
-        //                         -Dsonar.host.url=${SONAR_HOST} \
-        //                         -Dsonar.token=${SONAR_TOKEN} \
-        //                         -Dsonar.projectKey=${SONAR_PROJECTKEY}
-        //                 """
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Sonarqube_Static_Code_Analysis') {
+            steps {
+                withCredentials([
+                    string(credentialsId: 'SONAR_HOST', variable: 'SONAR_HOST'),
+                    string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN'),
+                    string(credentialsId: 'SONAR_PROJECTKEY', variable: 'SONAR_PROJECTKEY')
+                ]) {
+                    script {
+                        sh """
+                            docker run --rm \
+                                -v ${env.WORKSPACE}:/usr/src \
+                                sonarsource/sonar-scanner-cli:latest \
+                                sonar-scanner \
+                                -Dsonar.host.url=${SONAR_HOST} \
+                                -Dsonar.token=${SONAR_TOKEN} \
+                                -Dsonar.projectKey=${SONAR_PROJECTKEY}
+                        """
+                    }
+                }
+            }
+        }
 
         stage('Snyk_Composition_Analysis') {
             steps {
