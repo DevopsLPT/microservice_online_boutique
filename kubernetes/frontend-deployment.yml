@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend-deployment
+  namespace: online-boutique
+spec:
+  replicas: 1
+  revisionHistoryLimit: 11
+  selector:
+    matchLabels:
+      app: frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: frontend
+      namespace: online-boutique
+    spec:
+      containers:
+        - image: thuanlp/online_boutique_frontend:latest
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+            - containerPort: 80
+              name: tcp
+              protocol: TCP
+          env:
+          - name: PORT
+            value: "80"
+          - name: "DISABLE_PROFILER"
+            value: "0"
+          - name: "ENABLE_TRACING"
+            value: "0"
+          - name: "AD_SERVICE_ADDR"
+            value: "adservice:9555"
+          - name: "PRODUCT_CATALOG_SERVICE_ADDR"
+            value: "productcatalogservice:3550"
+          - name: "CURRENCY_SERVICE_ADDR"
+            value: "currencyservice:7000"
+          - name: "CART_SERVICE_ADDR"
+            value: "cartservice:7070"
+          - name: "RECOMMENDATION_SERVICE_ADDR"
+            value: "recommendationservice:8088"
+          - name: "SHIPPING_SERVICE_ADDR"
+            value: "shippingservice:50051"
+          - name: "CHECKOUT_SERVICE_ADDR"
+            value: "checkoutservice:5050"
+                                                                
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: online-boutique
+spec:
+  type: ClusterIP
+  selector:
+    app: frontend
+  ports:
+    - name: tcp
+      port: 80
+      protocol: TCP
+      targetPort: 80

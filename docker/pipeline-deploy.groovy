@@ -9,7 +9,7 @@ def isServiceRunning(service) {
 def serviceDown(service) {
     if (isServiceRunning(service)) {
         echo "Stopping service ${service}..."
-        sh """ docker-compose -f docker-compose.${service}.yml down """
+        sh """ docker-compose -f docker/docker-compose.${service}.yml down """
     } else {
         echo "Service ${service} is not running, skipping down..."
     }
@@ -17,7 +17,7 @@ def serviceDown(service) {
 
 def serviceDeploy(service) {
     echo "Deploying service ${service}..."
-    sh """ docker-compose -f docker-compose.${service}.yml up -d """
+    sh """ docker-compose -f docker/docker-compose.${service}.yml up -d """
 }
 
 node("boutique-deploy"){
