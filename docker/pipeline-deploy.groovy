@@ -2,7 +2,7 @@ def services = params.service.split(',')
 echo "Services array: ${services}"
 
 def isServiceRunning(service) {
-    def result = sh(script: """docker ps --filter "name=${service}" --format "{{.Names}}" """, returnStdout: true).trim()
+    def result = sh(script: """docker ps -a --filter "name=${service}" --format "{{.Names}}" """, returnStdout: true).trim()
     return result ? true : false
 }
 
