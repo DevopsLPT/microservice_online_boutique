@@ -3,7 +3,6 @@ version: "3.8"
 services:
   cartservice:
     image: thuanlp/online_boutique_cartservice:latest
-    container_name: cartservice
     ports:
       - "7070:7070"
     environment:
