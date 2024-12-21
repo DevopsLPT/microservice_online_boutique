@@ -8,7 +8,6 @@ services:
       - "9555:9555"
     environment:
       - PORT=9555
-    container_name: adservice
     restart: always
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:9555"]
