@@ -15,7 +15,6 @@ services:
       - CART_SERVICE_ADDR=cartservice:7070
     ports:
       - "5050:5050"
-    container_name: checkoutservice
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:5050"]
       interval: 10s
