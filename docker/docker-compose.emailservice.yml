@@ -12,7 +12,6 @@ services:
       - DISABLE_PROFILER=1
     security_opt:
       - no-new-privileges:true
-    container_name: emailservice
     healthcheck:
       test: ["CMD", "/bin/grpc_health_probe", "-addr=:5000"]
       interval: 5s
