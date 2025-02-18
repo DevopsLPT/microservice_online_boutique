@@ -68,6 +68,7 @@ pipeline {
                 }
             }
         }
+
         stage('Push Docker Image') {
             steps {
                 script {
@@ -75,6 +76,8 @@ pipeline {
                 }
             }
         }
+
+        
     }
     post {
         always {
