@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   recommendationservice:
-    image: thuanlp/online_boutique_recommendationservice:latest
+    image: harbor.lptdevops.website/online_boutique/recommendationservice:latest
     container_name: recommendationservice
     environment:
       - PORT=8088
@@ -22,4 +22,5 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true
+

@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   paymentservice:
-    image: thuanlp/online_boutique_paymentservice:latest
+    image: harbor.lptdevops.website/online_boutique/paymentservice:latest
     container_name: paymentservice
     environment:
       - PORT=50050
@@ -21,4 +21,4 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true

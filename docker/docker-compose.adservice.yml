@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   adservice:
-    image: thuanlp/online_boutique_adservice:latest
+    image: harbor.lptdevops.website/online_boutique/adservice:latest
     container_name: adservice
     ports:
       - "9555:9555"
@@ -20,4 +20,4 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true

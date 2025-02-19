@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   checkoutservice:
-    image: thuanlp/online_boutique_checkoutservice:latest
+    image: harbor.lptdevops.website/online_boutique/checkoutservice:latest
     container_name: checkoutservice
     restart: always
     environment:
@@ -26,4 +26,4 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true

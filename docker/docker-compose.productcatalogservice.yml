@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   productcatalogservice:
-    image: thuanlp/online_boutique_productcatalogservice:latest
+    image: harbor.lptdevops.website/online_boutique/productcatalogservice:latest
     container_name: productcatalogservice
     ports:
       - "3550:3550"
@@ -21,4 +21,5 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true
+

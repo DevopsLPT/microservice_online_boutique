@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   frontend:
-    image: thuanlp/online_boutique_frontend:latest
+    image: harbor.lptdevops.website/online_boutique/frontend:latest
     ports:
       - "80:80"
     restart: always
@@ -29,4 +29,4 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true

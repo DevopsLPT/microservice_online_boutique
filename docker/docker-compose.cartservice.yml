@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   cartservice:
-    image: thuanlp/online_boutique_cartservice:latest
+    image: harbor.lptdevops.website/online_boutique/cartservice:latest
     ports:
       - "7070:7070"
     environment:
@@ -21,4 +21,4 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true

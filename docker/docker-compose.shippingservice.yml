@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   shippingservice:
-    image: thuanlp/online_boutique_shippingservice:latest
+    image: harbor.lptdevops.website/online_boutique/shippingservice:latest
     container_name: shippingservice
     environment:
       - PORT=50051
@@ -21,4 +21,4 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true

@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   emailservice:
-    image: thuanlp/online_boutique_emailservice:latest
+    image: harbor.lptdevops.website/online_boutique/emailservice:latest
     container_name: emailservice
     ports:
       - "5000:5000"
@@ -23,4 +23,4 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true

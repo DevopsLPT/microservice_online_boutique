@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   currencyservice:
-    image: thuanlp/online_boutique_currencyservice:latest
+    image: harbor.lptdevops.website/online_boutique/currencyservice:latest
     container_name: currencyservice
     environment:
       - PORT=7000
@@ -21,4 +21,4 @@ services:
 
 networks:
   online_boutique_network:
-    driver: bridge
+    external: true
