@@ -54,7 +54,7 @@ pipeline {
         
                         docker run --rm -v ${WORKSPACE}:/${PROJECT} -v /var/run/docker.sock:/var/run/docker.sock \
                             aquasec/trivy image --format template --template "@contrib/html.tpl" \
-                            --output /shoeshop_fe/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+                            --output ${PROJECT}/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
                     """
                 }
             }
