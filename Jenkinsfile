@@ -6,6 +6,7 @@ pipeline {
         DOCKER_IMAGE_TAG = "latest"
         REPORT_TRIVY_NAME = "online_boutique_shippingservice_trivy_report"
         REGISTRY_URL = "harbor.lptdevops.website"
+        SONAR_PROJECTKEY = "OnlineBoutiqueShipping"
     }
     stages {
         stage('Checkout') {
@@ -19,7 +20,6 @@ pipeline {
                 withCredentials([
                     string(credentialsId: 'SONAR_HOST', variable: 'SONAR_HOST'),
                     string(credentialsId: 'SONAR_TOKEN_SHIPPING', variable: 'SONAR_TOKEN'),
-                    string(credentialsId: 'SONAR_PROJECTKEY_SHIPPING', variable: 'SONAR_PROJECTKEY')
                 ]) {
                     script {
                         sh """
