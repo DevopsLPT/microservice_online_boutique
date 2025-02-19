@@ -6,6 +6,8 @@ pipeline {
         DOCKER_IMAGE_TAG = "latest"
         REPORT_TRIVY_NAME = "online_boutique_cartservice_trivy_report"
         REGISTRY_URL = "harbor.lptdevops.website"
+        SONAR_PROJECTKEY = "OnlineBoutiqueCart"
+
     }
     stages {
         stage('Checkout') {
@@ -18,8 +20,7 @@ pipeline {
             steps {
                 withCredentials([
                     string(credentialsId: 'SONAR_HOST', variable: 'SONAR_HOST'),
-                    string(credentialsId: 'SONAR_TOKEN_CART', variable: 'SONAR_TOKEN'),
-                    string(credentialsId: 'SONAR_PROJECTKEY_CART', variable: 'SONAR_PROJECTKEY')
+                    string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN'),
                 ]) {
                     script {
                         sh """
@@ -54,7 +55,7 @@ pipeline {
         
                         docker run --rm -v ${WORKSPACE}:/${PROJECT} -v /var/run/docker.sock:/var/run/docker.sock \
                             aquasec/trivy image --format template --template "@contrib/html.tpl" \
-                            --output /shoeshop_fe/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+                            --output ${PROJECT}/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
                     """
                 }
             }
