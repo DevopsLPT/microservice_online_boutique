@@ -19,7 +19,7 @@ pipeline {
             steps {
                 withCredentials([
                     string(credentialsId: 'SONAR_HOST', variable: 'SONAR_HOST'),
-                    string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN'),
+                    string(credentialsId: 'SONAR_TOKEN_AD', variable: 'SONAR_TOKEN'),
                 ]) {
                     script {
                         sh """
