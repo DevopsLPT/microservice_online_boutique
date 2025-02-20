@@ -3,14 +3,16 @@ echo "Services array: ${services}"
 
 def dockerLogin() {
     echo "Logging into Docker Registry..."
-    sh """
-        echo '${DOCKER_REGISTRY_PASSWORD}' | docker login -u '${DOCKER_REGISTRY_USER}' --password-stdin ${DOCKER_REGISTRY_URL}
-    """
+    withCredentials([usernamePassword(credentialsId: 'harbor', usernameVariable: 'DOCKER_REGISTRY_USER', passwordVariable: 'DOCKER_REGISTRY_PASSWORD')]) {
+        sh """
+            echo '${DOCKER_REGISTRY_PASSWORD}' | docker login harbor.lptdevops.website -u '${DOCKER_REGISTRY_USER}' --password-stdin 
+        """
+    }
 }
 
 def pullDockerImage(service) {
     echo "Pulling Docker image for service ${service}..."
-    sh """docker pull ${DOCKER_REGISTRY_URL}/${service}:latest"""
+    sh """docker pull harbor.lptdevops.website/online_boutique/${service}:latest"""
 }
 
 def isServiceRunning(service) {
@@ -71,7 +73,10 @@ node("build-server") {
                 echo "Running on server: ${env.NODE_NAME}"
                 sh "hostname && pwd && ls -l && whoami"
 
-                pullDockerImage(service)
+                if (service != 'setupDB') {
+                    pullDockerImage(service)
+                }
+                
                 serviceDown(service)
                 serviceDeploy(service)
             }
