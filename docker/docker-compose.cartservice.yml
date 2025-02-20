@@ -7,7 +7,7 @@ services:
       - "7070:7070"
     environment:
       - PORT=7070
-      - REDIS_ADDR=34.142.201.159:6379
+      - REDIS_ADDR=redis.lptdevops.website:6379
     container_name: cartservice
     restart: always
     healthcheck:
