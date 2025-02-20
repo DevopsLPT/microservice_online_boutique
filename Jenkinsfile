@@ -60,7 +60,7 @@ pipeline {
                                 aquasec/trivy image --format template --template "@contrib/html.tpl" \
                                 --output ${PROJECT}/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
 
-                            curl -X POST "https://api.telegram.org/${BOT_TOKEN}/sendDocument" -F "chat_id=${CHAT_ID}" -F "document=@${WORKSPACE}/${REPORT_TRIVY_NAME}.html"
+                            curl -X POST "https://api.telegram.org/bot7981757228:AAH9o8WEjOferhkg13uD9FLdIKt4e5KsFUA/sendDocument" -F "chat_id=-4626748216" -F "document=@${WORKSPACE}/${REPORT_TRIVY_NAME}.html"
                         """
                     }
 
