@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cartservice
+  name: cartservice-deployment
+  namespace: online-boutique
+spec:
+  replicas: 1
+  revisionHistoryLimit: 11
+  selector:
+    matchLabels:
+      app: cartservice
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cartservice
+      namespace: online-boutique
+    spec:
+      containers:
+        - image: thuanlp/online_boutique_cartservice:latest
+          imagePullPolicy: Always
+          name: cartservice
+          ports:
+            - containerPort: 7070
+              name: tcp
+              protocol: TCP
+          env:
+          - name: PORT
+            value: "7070"
+          - name: "REDIS_ADDR"
+            value: "redis-cart:6379"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cartservice-service
+  namespace: online-boutique
+spec:
+  type: ClusterIP
+  selector:
+    app: cartservice
+  ports:
+    - name: tcp
+      port: 7070
+      protocol: TCP
+      targetPort: 7070
+
+
