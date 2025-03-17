@@ -43,7 +43,7 @@ pipeline {
                 }
             }
         }
-
+/*
         stage('Trivy_Image_Scan') {
             steps {
                 script {
@@ -60,10 +60,27 @@ pipeline {
                                 aquasec/trivy image --format template --template "@contrib/html.tpl" \
                                 --output ${PROJECT}/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
 
-                            # curl -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument" -F "chat_id=${CHAT_ID}" -F "document=@${WORKSPACE}/${REPORT_TRIVY_NAME}.html"
+                            curl -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument" -F "chat_id=${CHAT_ID}" -F "document=@${WORKSPACE}/${REPORT_TRIVY_NAME}.html"
                         """
                     }
 
+                }
+            }
+        }
+*/
+        stage('Trivy_Image_Scan') {
+            steps {
+                script {
+                    sh """
+                            docker run --rm -v ${WORKSPACE}:/${PROJECT} -v \
+                                /var/run/docker.sock:/var/run/docker.sock \
+                                aquasec/trivy image --download-db-only
+
+                            docker run --rm -v ${WORKSPACE}:/${PROJECT} -v /var/run/docker.sock:/var/run/docker.sock \
+                                aquasec/trivy image --format template --template "@contrib/html.tpl" \
+                                --output ${PROJECT}/${REPORT_TRIVY_NAME}.html ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+
+                        """
                 }
             }
         }
